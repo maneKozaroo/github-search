@@ -1,19 +1,31 @@
+import { reactive } from "vue";
 import { defineStore } from "pinia";
 
-export const useGithubSearchStore = defineStore({
-  id: "githubSearch",
+import { apiService } from "@/services";
+import type { SearchState } from "@/types";
 
-  state: () => ({
-    search: {
-      results: undefined,
-    },
-  }),
+export const useGithubSearchStore = defineStore("githubSearch", () => {
+  const search = reactive<SearchState>({
+    pageNumber: 1,
+    results: undefined,
+  });
 
-  getters: {},
+  async function searchRepositories(userInput: string) {
+    try {
+      const currentPage = search.pageNumber;
 
-  actions: {
-    async search(queryString: string) {
-      console.log("search with text:", queryString);
-    },
-  },
+      const queryString = `page=${currentPage}&q=${userInput}`;
+
+      const results = await apiService.github.repositories.search(queryString);
+
+      search.results = results;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return {
+    search,
+    searchRepositories,
+  };
 });
