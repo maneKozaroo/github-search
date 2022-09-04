@@ -1,5 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main>Home View</main>
+  <main>
+    <SearchForm />
+  </main>
 </template>
+
+<style scoped></style>
