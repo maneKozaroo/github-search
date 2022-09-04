@@ -3,7 +3,13 @@
 <template>
   <main>
     <SearchForm />
+
+    <SearchResults />
   </main>
 </template>
 
-<style scoped></style>
+<style>
+html {
+  background-color: var(--background-color);
+}
+</style>
