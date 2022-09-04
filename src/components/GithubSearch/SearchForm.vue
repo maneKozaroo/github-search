@@ -10,18 +10,22 @@
 
 <script setup lang="ts">
 import { FORMS } from "@/constants";
+import { useGithubSearchStore } from "@/stores/githubSearch";
+
+const githubSearchStore = useGithubSearchStore();
 
 const handleSearchSubmit = (event: Event) => {
   const targetForm = event.target as HTMLFormElement;
 
-  if (!targetForm) return;
+  if (!targetForm) return; // TODO: error handling
 
   const formData = new FormData(targetForm);
 
-  console.log(
-    "TODO: call search action with text:",
-    formData.get(FORMS.SEARCH.FIELDS.QUERY.NAME)
-  );
+  const queryString = formData.get(FORMS.SEARCH.FIELDS.QUERY.NAME);
+
+  if (!queryString) return; // TODO: error handling
+
+  githubSearchStore.search(queryString as string);
 };
 </script>
 
