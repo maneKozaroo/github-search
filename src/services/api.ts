@@ -1,11 +1,12 @@
-import { httpClient } from "./httpClient";
+import { SERVICES } from "@/constants";
+import { httpClient } from "@/services";
 import type { SearchResponse } from "@/types";
 
 export const apiService = {
   github: {
     repositories: {
       search: async (query: string) => {
-        const urlString = "https://api.github.com/search/repositories";
+        const urlString = SERVICES.API.GITHUB.REPOSITORIES.SEARCH.URL;
 
         const url = new URL(`${urlString}?${query}`);
 
