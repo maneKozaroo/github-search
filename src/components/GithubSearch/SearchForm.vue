@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { FORMS } from "@/constants";
-import { useGithubSearchStore } from "@/stores/githubSearch";
+import { useGithubSearchStore } from "@/stores";
 
 const githubSearchStore = useGithubSearchStore();
 
@@ -25,7 +25,7 @@ const handleSearchSubmit = (event: Event) => {
 
   if (!queryString) return; // TODO: error handling
 
-  githubSearchStore.search(queryString as string);
+  githubSearchStore.searchRepositories(queryString as string);
 };
 </script>
 
