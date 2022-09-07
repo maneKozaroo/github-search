@@ -5,6 +5,8 @@
     @submit.prevent="handleSearchSubmit"
   >
     <SearchInput type="search" />
+
+    <SearchButton type="submit">Search</SearchButton>
   </form>
 </template>
 
