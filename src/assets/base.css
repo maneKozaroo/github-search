@@ -2,6 +2,8 @@
   --background-color: #ddd;
 
   --text-color: #333;
+
+  --link-color: var(--text-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -9,5 +11,7 @@
     --background-color: #333;
 
     --text-color: #ddd;
+
+    --link-color: var(--text-color);
   }
 }
