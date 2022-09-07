@@ -1,6 +1,10 @@
 <template>
   <div id="search-results">
-    <div v-for="item in foundItems" :key="item.id">{{ item.name }}</div>
+    <div v-for="item in foundItems" :key="item.id">
+      <a :href="item.html_url" v-if="item.html_url" target="_blank">{{
+        item.name
+      }}</a>
+    </div>
   </div>
 </template>
 
