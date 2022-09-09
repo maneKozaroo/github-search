@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 import { defineStore } from "pinia";
 
 import { apiService } from "@/services";
@@ -24,8 +24,16 @@ export const useGithubSearchStore = defineStore("githubSearch", () => {
     }
   }
 
+  const totalPages = computed(() => {
+    const itemsPerPage = 30;
+    const totalItems = search.results?.total_count || 0;
+
+    return Math.ceil(totalItems / itemsPerPage);
+  });
+
   return {
     search,
     searchRepositories,
+    totalPages,
   };
 });
