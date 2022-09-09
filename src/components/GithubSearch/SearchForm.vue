@@ -4,9 +4,11 @@
     :name="FORMS.SEARCH.NAME"
     @submit.prevent="handleSearchSubmit"
   >
-    <SearchInput type="search" />
+    <FieldsetBase>
+      <SearchInput type="search" />
 
-    <SearchButton type="submit">Search</SearchButton>
+      <SearchButton type="submit">Search</SearchButton>
+    </FieldsetBase>
   </form>
 </template>
 
