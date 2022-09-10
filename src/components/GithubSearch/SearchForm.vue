@@ -17,6 +17,7 @@ import { FORMS } from "@/constants";
 import { useGithubSearchStore } from "@/stores";
 
 const githubSearchStore = useGithubSearchStore();
+import { router } from "@/router";
 
 const handleSearchSubmit = (event: Event) => {
   const targetForm = event.target as HTMLFormElement;
