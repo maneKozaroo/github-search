@@ -1,11 +1,11 @@
 <template>
   <div id="search-results">
     <template v-if="foundItems && foundItems.length === 0">
-      <div>No results found</div>
+      <div class="empty-results-message">No results found</div>
     </template>
 
     <template v-else>
-      <div v-for="item in foundItems" :key="item.id">
+      <div class="found-items" v-for="item in foundItems" :key="item.id">
         <a :href="item.html_url" v-if="item.html_url" target="_blank">{{
           item.name
         }}</a>
@@ -53,5 +53,16 @@ watch(router.currentRoute, searchRepositories);
 <style scoped>
 #search-results {
   color: var(--text-color);
+}
+
+.found-items {
+  padding: 0.5rem 1rem;
+}
+.found-items a {
+  font-size: 1.5rem;
+}
+
+.empty-results-message {
+  text-align: center;
 }
 </style>
