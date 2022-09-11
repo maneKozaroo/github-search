@@ -1,8 +1,12 @@
 <template>
-  <div v-if="showPagination">
+  <div class="search-pagination" v-if="showPagination">
     <RouterLink
       v-for="page in paginationPages"
-      :class="['pagination-link', { disabled: queryingThrottled }]"
+      :class="[
+        'pagination-link',
+        { disabled: queryingThrottled },
+        { active: page === currentPage },
+      ]"
       :key="page"
       :to="{ name: 'home', query: { ...currentRouteQuery, page } }"
       >{{ page }}</RouterLink
@@ -38,11 +42,30 @@ const currentRouteQuery = computed(() => {
 
   return currentRoute.query;
 });
+
+const currentPage = computed(() => {
+  return githubSearchStore.search.status.currentPage;
+});
 </script>
 
 <style scoped>
+.search-pagination {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
 .pagination-link {
+  border: 1px solid var(--button-border-color);
+  border-radius: 0.25rem;
   color: var(--text-color);
+  min-width: 1.25rem;
+  padding: 0.25rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.pagination-link.active {
+  border-color: red;
 }
 
 .pagination-link.disabled {
