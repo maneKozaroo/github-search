@@ -5,6 +5,8 @@
     <SearchPagination />
 
     <SearchResults />
+
+    <SearchPagination />
   </main>
 </template>
 
