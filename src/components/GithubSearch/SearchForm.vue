@@ -1,17 +1,21 @@
 <template>
   <form
+    class="search-form"
     :id="FORMS.SEARCH.NAME"
     :name="FORMS.SEARCH.NAME"
     @submit.prevent="handleSearchSubmit"
   >
-    <FieldsetBase :disabled="queryingThrottled">
+    <FieldsetBase class="main-fieldset" :disabled="queryingThrottled">
       <SearchInput
+        class="search-user-input"
         type="search"
         @input="handleSearchInput"
         :value="userInput"
       />
 
-      <SearchButton type="submit">Search</SearchButton>
+      <SearchButton class="search-submit-button" type="submit">
+        Search
+      </SearchButton>
     </FieldsetBase>
   </form>
 </template>
@@ -63,4 +67,14 @@ const handleSearchSubmit = (event: Event) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.main-fieldset {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.search-submit-button {
+  margin: 0.5rem 0 0 0;
+}
+</style>
