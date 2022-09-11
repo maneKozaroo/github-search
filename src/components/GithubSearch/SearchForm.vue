@@ -4,8 +4,12 @@
     :name="FORMS.SEARCH.NAME"
     @submit.prevent="handleSearchSubmit"
   >
-    <FieldsetBase>
-      <SearchInput type="search" />
+    <FieldsetBase :disabled="queryingThrottled">
+      <SearchInput
+        type="search"
+        @input="handleSearchInput"
+        :value="userInput"
+      />
 
       <SearchButton type="submit">Search</SearchButton>
     </FieldsetBase>
@@ -13,11 +17,32 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import { FORMS } from "@/constants";
+import { router } from "@/router";
 import { useGithubSearchStore } from "@/stores";
 
 const githubSearchStore = useGithubSearchStore();
-import { router } from "@/router";
+
+const queryingThrottled = computed(() => {
+  return githubSearchStore.throttled;
+});
+
+const userInput = computed(() => {
+  return githubSearchStore.search.form.userInput;
+});
+
+const handleSearchInput = (event: Event) => {
+  const targetInput = event.target as HTMLInputElement;
+
+  githubSearchStore.setUserInput({ userInput: targetInput.value });
+
+  if (targetInput.value === "") {
+    router.push({
+      name: "home",
+    });
+  }
+};
 
 const handleSearchSubmit = (event: Event) => {
   const targetForm = event.target as HTMLFormElement;
@@ -26,11 +51,15 @@ const handleSearchSubmit = (event: Event) => {
 
   const formData = new FormData(targetForm);
 
-  const queryString = formData.get(FORMS.SEARCH.FIELDS.QUERY.NAME);
+  const queryString = formData.get(FORMS.SEARCH.FIELDS.QUERY.NAME) as string;
+  const encodedQueryString = encodeURIComponent(queryString);
 
-  if (!queryString) return; // TODO: error handling
+  if (!encodedQueryString) return; // TODO: error handling
 
-  githubSearchStore.searchRepositories(queryString as string);
+  router.push({
+    name: "home",
+    query: { page: 1, query: encodedQueryString },
+  });
 };
 </script>
 
