@@ -1,12 +1,14 @@
-<script setup lang="ts"></script>
-
 <template>
   <main>
     <SearchForm />
 
+    <SearchPagination />
+
     <SearchResults />
   </main>
 </template>
+
+<script setup lang="ts"></script>
 
 <style>
 html {
