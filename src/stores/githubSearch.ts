@@ -67,7 +67,7 @@ export const useGithubSearchStore = defineStore("githubSearch", () => {
    */
   const paginationPages = computed(() => {
     const pageCount = totalPages.value;
-    const desiredLinkPadding = 5;
+    const desiredLinkPadding = 4;
     const desiredLinkCount = desiredLinkPadding * 2 + 1;
 
     if (pageCount === 0) return null;
